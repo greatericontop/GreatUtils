@@ -13,9 +13,15 @@ commands:
     description: View your scheduled tasks.
     usage: '/mytasks'
     permission: greatutils.mytasks
+  canceltask:
+    description: Cancel a scheduled task.
+    usage: '§cUsage: /canceltask <task ID> [<another task ID>]  or  /canceltask all'
+    permission: greatutils.canceltask
 
 permissions:
   greatutils.execlater:
     default: op
   greatutils.mytasks:
     default: true
+  greatutils.canceltask:
+    default: op
