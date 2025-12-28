@@ -1,0 +1,5 @@
+name: 'GreatUtils'
+version: '${project.version}'
+main: io.github.greatericontop.greatutils.GreatUtils
+api-version: '1.19'
+authors: [greateric]
