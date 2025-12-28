@@ -23,12 +23,12 @@ public class ExecLaterCommand implements CommandExecutor, TabCompleter {
         Integer delay = GreatCommands.argumentTime(0, args);
         if (delay == null || delay < 0) {
             sender.sendMessage("§cInvalid delay. Examples: 20t, 1s, 5m");
-            return true;
+            return false;
         }
         String commandToRun = GreatCommands.argumentStringConsumeRest(1, args);
         if (commandToRun == null) {
             sender.sendMessage("§cEnter a command!");
-            return true;
+            return false;
         }
         BukkitTask bt = Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.dispatchCommand(sender, commandToRun), delay);
         plugin.commandTaskManager.put(sender, bt, commandToRun);

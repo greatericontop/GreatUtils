@@ -7,7 +7,7 @@ authors: [greateric]
 commands:
   execlater:
     description: Execute a command later.
-    usage: /execlater <delay> <command...>
+    usage: '§cUsage: /execlater <delay> <command...>'
     permission: greatutils.execlater
 
 permissions:
