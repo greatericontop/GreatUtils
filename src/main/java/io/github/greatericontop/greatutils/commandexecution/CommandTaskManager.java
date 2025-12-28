@@ -1,6 +1,7 @@
 package io.github.greatericontop.greatutils.commandexecution;
 
 import io.github.greatericontop.greatutils.GreatUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -9,8 +10,10 @@ import org.bukkit.scheduler.BukkitTask;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public class CommandTaskManager {
@@ -48,7 +51,22 @@ public class CommandTaskManager {
         } else {
             return null;
         }
-        return commandTasks.get(uuid);
+        return prune(commandTasks.get(uuid));
+    }
+
+    private @Nullable List<CommandTask> prune(@Nullable List<CommandTask> tasks) {
+        if (tasks == null)  return null;
+        // Collect active task IDs into a hashset for O(1) lookup
+        Set<Integer> activeTaskIds = new HashSet<>();
+        for (BukkitTask bt : Bukkit.getScheduler().getPendingTasks()) {
+            activeTaskIds.add(bt.getTaskId());
+        }
+        for (int i = tasks.size() - 1; i >= 0; i--) {
+            if (!activeTaskIds.contains(tasks.get(i).taskId())) {
+                tasks.remove(i);
+            }
+        }
+        return tasks; // Modifies in place and returns reference to the same list
     }
 
 }

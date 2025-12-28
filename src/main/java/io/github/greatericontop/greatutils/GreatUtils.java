@@ -2,6 +2,7 @@ package io.github.greatericontop.greatutils;
 
 import io.github.greatericontop.greatutils.commandexecution.CommandTask;
 import io.github.greatericontop.greatutils.commandexecution.CommandTaskManager;
+import io.github.greatericontop.greatutils.commandexecution.ExecLaterCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public class GreatUtils extends JavaPlugin {
     public void onEnable() {
         commandTaskManager = new CommandTaskManager(this);
 
+        this.getCommand("execlater").setExecutor(new ExecLaterCommand(this));
     }
 
 }
