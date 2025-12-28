@@ -9,6 +9,10 @@ commands:
     description: Execute a command later.
     usage: '§cUsage: /execlater <delay> <command...>'
     permission: greatutils.execlater
+  execlaterrng:
+    description: Execute a command after, with random delay.
+    usage: '§cUsage: /execlaterrng <min delay> <max delay> <command...>'
+    permission: greatutils.execlater
   mytasks:
     description: View your scheduled tasks.
     usage: '/mytasks'
