@@ -1,6 +1,10 @@
 package io.github.greatericontop.greatutils.util;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,6 +62,13 @@ public class GreatCommands {
         return result;
     }
 
+    public static @Nullable Player argumentPlayer(int i, String[] args) {
+        if (args.length <= i) {
+            return null;
+        }
+        return Bukkit.getPlayer(args[i]);
+    }
+
     public static @Nullable Integer argumentTime(int i, String[] args) {
         if (args.length <= i) {
             return null;
@@ -88,6 +99,21 @@ public class GreatCommands {
             return List.of(arg+"t", arg+"s", arg+"m", arg+"h");
         }
         return null;
+    }
+
+    public static List<String> tabCompletePlayers(String arg, String... extraChoices) {
+        List<String> suggestions = new ArrayList<>();
+        for (String choice : extraChoices) {
+            if (choice.toLowerCase().startsWith(arg.toLowerCase())) {
+                suggestions.add(choice);
+            }
+        }
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.getName().toLowerCase().startsWith(arg.toLowerCase())) {
+                suggestions.add(player.getName());
+            }
+        }
+        return suggestions;
     }
 
 }

@@ -25,6 +25,10 @@ commands:
     description: Cancel a scheduled task.
     usage: '§cUsage: /canceltask <task ID> [<another task ID>]  or  /canceltask all'
     permission: greatutils.canceltask
+  sudo:
+    description: Execute a command as another player.
+    usage: '§cUsage: /sudo <player> <chat or command...>'
+    permission: greatutils.sudo
 
 permissions:
   greatutils.execlater:
@@ -34,4 +38,6 @@ permissions:
   greatutils.mytasks:
     default: true
   greatutils.canceltask:
+    default: op
+  greatutils.sudo:
     default: op
