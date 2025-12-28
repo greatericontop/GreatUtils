@@ -6,6 +6,7 @@ import io.github.greatericontop.greatutils.commandexecution.ExecLaterCommand;
 import io.github.greatericontop.greatutils.commandexecution.ExecLaterRNGCommand;
 import io.github.greatericontop.greatutils.commandexecution.ExecTimerCommand;
 import io.github.greatericontop.greatutils.commandexecution.MyTasksCommand;
+import io.github.greatericontop.greatutils.commandexecution.SudoCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class GreatUtils extends JavaPlugin {
@@ -21,6 +22,7 @@ public class GreatUtils extends JavaPlugin {
         this.getCommand("exectimer").setExecutor(new ExecTimerCommand(this));
         this.getCommand("mytasks").setExecutor(new MyTasksCommand(this));
         this.getCommand("canceltask").setExecutor(new CancelTaskCommand(this));
+        this.getCommand("sudo").setExecutor(new SudoCommand());
     }
 
 }
