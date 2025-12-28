@@ -9,7 +9,13 @@ commands:
     description: Execute a command later.
     usage: '§cUsage: /execlater <delay> <command...>'
     permission: greatutils.execlater
+  mytasks:
+    description: View your scheduled tasks.
+    usage: '/mytasks'
+    permission: greatutils.mytasks
 
 permissions:
   greatutils.execlater:
     default: op
+  greatutils.mytasks:
+    default: true
