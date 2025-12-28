@@ -6,10 +6,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 
 import java.util.List;
 
-public class CancelTaskCommand implements CommandExecutor {
+public class CancelTaskCommand implements CommandExecutor, TabCompleter {
 
     private final GreatUtils plugin;
     public CancelTaskCommand(GreatUtils plugin) {
@@ -45,4 +46,13 @@ public class CancelTaskCommand implements CommandExecutor {
         }
         return true;
     }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 1) {
+            return List.of("<task number>", "all");
+        }
+        return List.of("<another task number>");
+    }
+
 }
