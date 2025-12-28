@@ -3,7 +3,6 @@ package io.github.greatericontop.greatutils.util;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class GreatCommands {
 
@@ -81,9 +80,9 @@ public class GreatCommands {
         }
     }
 
-    public static List<String> tabCompleteTime(String arg, String paramName) {
+    public static List<String> tabCompleteTime(String arg, String... paramNames) {
         if (arg.isEmpty()) {
-            return List.of(paramName);
+            return List.of(paramNames);
         }
         if (arg.matches("^\\d+$")) {
             return List.of(arg+"t", arg+"s", arg+"m", arg+"h");

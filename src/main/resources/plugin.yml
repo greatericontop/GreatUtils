@@ -13,6 +13,10 @@ commands:
     description: Execute a command after, with random delay.
     usage: '§cUsage: /execlaterrng <min delay> <max delay> <command...>'
     permission: greatutils.execlater
+  exectimer:
+    description: Execute a command repeatedly on a timer.
+    usage: '§cUsage: /exectimer [<number of times> <interval>  or  <interval> <number of times>] <command...>'
+    permission: greatutils.exectimer
   mytasks:
     description: View your scheduled tasks.
     usage: '/mytasks'
@@ -24,6 +28,8 @@ commands:
 
 permissions:
   greatutils.execlater:
+    default: op
+  greatutils.exectimer:
     default: op
   greatutils.mytasks:
     default: true
