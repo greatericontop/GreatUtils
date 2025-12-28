@@ -1,4 +1,12 @@
 package io.github.greatericontop.greatutils;
 
-public class GreatUtils {
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class GreatUtils extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+
+    }
+
 }
