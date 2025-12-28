@@ -38,8 +38,10 @@ public class ExecLaterCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        // Implementation goes here
-        return null;
+        if (args.length == 1) {
+            return GreatCommands.tabCompleteTime(args[0], "<delay>");
+        }
+        return List.of("<command...>");
     }
 
 }
