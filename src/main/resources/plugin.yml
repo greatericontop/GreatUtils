@@ -29,6 +29,10 @@ commands:
     description: Execute a command as another player.
     usage: '§cUsage: /sudo <player> <chat or command...>'
     permission: greatutils.sudo
+  kit:
+    description: Manage kits
+    usage: '§cUsage: /kit <kit> | /kit <kit> update | /kit <kit>'
+    permission: greatutils.kit
 
 permissions:
   greatutils.execlater:
@@ -40,4 +44,6 @@ permissions:
   greatutils.canceltask:
     default: op
   greatutils.sudo:
+    default: op
+  greatutils.kit:
     default: op
