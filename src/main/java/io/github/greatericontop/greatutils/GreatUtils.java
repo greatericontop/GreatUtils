@@ -23,7 +23,11 @@ public class GreatUtils extends JavaPlugin {
     public void onEnable() {
         commandTaskManager = new CommandTaskManager(this);
         File kitFile = new File(this.getDataFolder(), "kits.yml");
+
         kitConfig = YamlConfiguration.loadConfiguration(kitFile);
+        if (kitConfig.getConfigurationSection("kits") == null) {
+            kitConfig.createSection("kits");
+        }
 
         this.getCommand("execlater").setExecutor(new ExecLaterCommand(this));
         this.getCommand("execlaterrng").setExecutor(new ExecLaterRNGCommand(this));
