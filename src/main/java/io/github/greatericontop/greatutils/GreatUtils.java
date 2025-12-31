@@ -8,6 +8,7 @@ import io.github.greatericontop.greatutils.commandexecution.ExecTimerCommand;
 import io.github.greatericontop.greatutils.commandexecution.MyTasksCommand;
 import io.github.greatericontop.greatutils.commandexecution.SudoCommand;
 import io.github.greatericontop.greatutils.kits.KitCommand;
+import io.github.greatericontop.greatutils.warps.WarpCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,15 +19,19 @@ public class GreatUtils extends JavaPlugin {
 
     public CommandTaskManager commandTaskManager;
     public YamlConfiguration kitConfig = null;
+    public YamlConfiguration warpConfig = null;
 
     @Override
     public void onEnable() {
         commandTaskManager = new CommandTaskManager(this);
-        File kitFile = new File(this.getDataFolder(), "kits.yml");
 
-        kitConfig = YamlConfiguration.loadConfiguration(kitFile);
+        kitConfig = YamlConfiguration.loadConfiguration(new File(this.getDataFolder(), "kits.yml"));
         if (kitConfig.getConfigurationSection("kits") == null) {
             kitConfig.createSection("kits");
+        }
+        warpConfig = YamlConfiguration.loadConfiguration(new File(this.getDataFolder(), "warps.yml"));
+        if (warpConfig.getConfigurationSection("warps") == null) {
+            warpConfig.createSection("warps");
         }
 
         this.getCommand("execlater").setExecutor(new ExecLaterCommand(this));
@@ -36,8 +41,14 @@ public class GreatUtils extends JavaPlugin {
         this.getCommand("canceltask").setExecutor(new CancelTaskCommand(this));
         this.getCommand("sudo").setExecutor(new SudoCommand());
         this.getCommand("kit").setExecutor(new KitCommand(this));
+        this.getCommand("warp").setExecutor(new WarpCommand(this));
 
         Bukkit.getScheduler().runTaskTimer(this, this::saveAll, 2401L, 2401L);
+    }
+
+    @Override
+    public void onDisable() {
+        saveAll();
     }
 
 
@@ -46,6 +57,11 @@ public class GreatUtils extends JavaPlugin {
             kitConfig.save(new File(this.getDataFolder(), "kits.yml"));
         } catch (Exception e) {
             this.getLogger().severe("Could not save kits data!");
+        }
+        try {
+            warpConfig.save(new File(this.getDataFolder(), "warps.yml"));
+        } catch (Exception e) {
+            this.getLogger().severe("Could not save warps data!");
         }
     }
 

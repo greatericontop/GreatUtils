@@ -33,6 +33,10 @@ commands:
     description: Manage kits
     usage: '§cUsage: /kit <kit> | /kit <kit> update | /kit <kit>'
     permission: greatutils.kit
+  warp:
+    description: Manage warps
+    usage: '§cUsage: /warp <warp> | /warp <warp> set | /warp <warp> delete'
+    permission: greatutils.warp
 
 permissions:
   greatutils.execlater:
@@ -46,4 +50,6 @@ permissions:
   greatutils.sudo:
     default: op
   greatutils.kit:
+    default: op
+  greatutils.warp:
     default: op
