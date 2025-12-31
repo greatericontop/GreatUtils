@@ -43,3 +43,8 @@ GreatUtils provides a simple kit system meant for friendly servers.
 
 ## Warps
 
+A no-nonsense simple warp system.
+
+- `/warp <warp name>` - Give yourself a kit
+- `/warp <warp name> set` - Set a warp at your current position
+- `/warp <warp name> delete` - Delete a warp
