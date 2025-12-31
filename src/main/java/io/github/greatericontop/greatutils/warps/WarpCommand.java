@@ -76,7 +76,7 @@ public class WarpCommand implements CommandExecutor, TabCompleter {
             return StringUtil.copyPartialMatches(args[0], getAvailableWarps(), new ArrayList<>(getAvailableWarps().size()));
         }
         if (args.length == 2) {
-            return StringUtil.copyPartialMatches(args[1], List.of("update", "delete"), new ArrayList<>(2));
+            return StringUtil.copyPartialMatches(args[1], List.of("set", "delete"), new ArrayList<>(2));
         }
         return null;
     }
