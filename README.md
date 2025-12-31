@@ -28,3 +28,15 @@ For example, you can make a basic duel world border auto-shrink with the followi
   # After 5 minutes, start shrinking the world border
   - execlater 5m worldborder set 20 300
 ```
+
+## Kits
+
+Most kit plugins are very complicated and confusing to use.
+GreatUtils provides a simple kit system meant for friendly servers.
+(If you're looking for a lot of features, you should use a more complex kit plugin.)
+
+- `/kit <kit name>` - Give yourself a kit
+- `/kit <kit name> everyone` - Give the kit to all players
+- `/kit <kit name> update` - Create or update a kit with your current inventory contents
+  - If you replace an existing kit, a hidden backup is created with the same name with a `~` suffix. For example, `/kit kit1 update` -> old kit backed up in `kit1~`.
+- `/kit <kit name> delete` - Delete a kit (also creates a backup with `~` suffix)
