@@ -14,7 +14,6 @@ import org.bukkit.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class KitCommand implements CommandExecutor, TabCompleter {
 
@@ -24,8 +23,17 @@ public class KitCommand implements CommandExecutor, TabCompleter {
     }
 
     public List<String> getAvailableKits() {
-        Set<String> keys = plugin.kitConfig.getConfigurationSection("kits").getKeys(false);
-        return new ArrayList<>(keys);
+        List<String> ret = new ArrayList<>();
+        for (String key : plugin.kitConfig.getConfigurationSection("kits").getKeys(false)) {
+            if (!key.endsWith("~")) {
+                ret.add(key);
+            }
+        }
+        return ret;
+    }
+
+    public boolean kitExists(String kitName) {
+        return plugin.kitConfig.getString("kits." + kitName) != null;
     }
 
     public ItemStack[] loadKit(String kitName) {
@@ -39,8 +47,11 @@ public class KitCommand implements CommandExecutor, TabCompleter {
     }
 
     public void saveKit(Player player, String kitName) {
+        saveKit(player.getInventory().getContents(), kitName);
+    }
+    public void saveKit(ItemStack[] contents, String kitName) {
         YamlConfiguration yamlConfiguration = new YamlConfiguration();
-        yamlConfiguration.set("inventory", player.getInventory().getContents());
+        yamlConfiguration.set("inventory", contents);
         plugin.kitConfig.set("kits."+kitName, yamlConfiguration.saveToString());
     }
 
@@ -58,14 +69,20 @@ public class KitCommand implements CommandExecutor, TabCompleter {
         }
 
         if (subOperation == null) {
-            // Give kit
+            if (!kitExists(kitName)) {
+                player.sendMessage("§cKit §f%s §cdoes not exist.".formatted(kitName));
+                return true;
+            }
             ItemStack[] kit = loadKit(kitName);
             player.getInventory().setContents(kit);
             player.sendMessage("§3Gave kit §f%s §3to you.".formatted(kitName));
             return true;
         }
         if (subOperation.equalsIgnoreCase("update")) {
-            // Update/create kit
+            if (kitExists(kitName)) {
+                // Save a backup
+                saveKit(loadKit(kitName), "%s~".formatted(kitName));
+            }
             saveKit(player, kitName);
             player.sendMessage("§3Saved kit §f%s§3.".formatted(kitName));
             return true;
@@ -80,6 +97,12 @@ public class KitCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if (subOperation.equalsIgnoreCase("delete")) {
+            // Save backup if the kit is itself not a backup
+            if (!kitExists(kitName) && !kitName.endsWith("~")) {
+                player.sendMessage("§cKit §f%s §cdoes not exist.".formatted(kitName));
+                return true;
+            }
+            saveKit(loadKit(kitName), "%s~".formatted(kitName));
             plugin.kitConfig.set("kits."+kitName, null);
             player.sendMessage("§3Deleted kit §f%s§3.".formatted(kitName));
             return true;
