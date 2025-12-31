@@ -40,3 +40,6 @@ GreatUtils provides a simple kit system meant for friendly servers.
 - `/kit <kit name> update` - Create or update a kit with your current inventory contents
   - If you replace an existing kit, a hidden backup is created with the same name with a `~` suffix. For example, `/kit kit1 update` -> old kit backed up in `kit1~`.
 - `/kit <kit name> delete` - Delete a kit (also creates a backup with `~` suffix)
+
+## Warps
+
